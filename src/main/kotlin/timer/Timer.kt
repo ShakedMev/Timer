@@ -1,11 +1,11 @@
 package timer
 
 /**
- * A modified version of WPILib's Timer.java in edu.wpi.first.wpilibj,
+ * A modified version of WPILib's `Timer.java` in `edu.wpi.first.wpilibj`,
  * that is both RoboRIO and PC friendly! (and is in Kotlin)
  *
- * To do so, it relies on `System.currentTimeMillis`. If you're writing
- * code for a RoboRIO and need an accuracy of microseconds for some reason
+ * To be PC friendly, it relies on `System.currentTimeMillis`. If you're writing
+ * code for a RoboRIO and need a precision of microseconds for some reason
  * (maybe things moving really fast?) use WPIlib's timer instead, it
  * relies on `RobotController.getFPGATimeStamp`.
  */
@@ -27,9 +27,7 @@ class Timer() {
         get() = (millis / 1000).toDouble()
         private set
 
-    /**
-     * Starts the timer if it isn't running already.
-     */
+    /** Starts the timer if it isn't running already. */
     fun start() {
         if(!running) {
             startTimeMillis = System.currentTimeMillis()
@@ -37,6 +35,11 @@ class Timer() {
         }
     }
 
+    /**
+     * Resets the time to 0 by setting the accumulated
+     * time to 0 and the start time to the current time.
+     * Does NOT stop the timer if it's running.
+     */
     fun reset() {
         startTimeMillis = System.currentTimeMillis()
         accumulatedTimeMillis = 0L
@@ -62,7 +65,10 @@ class Timer() {
         }
     }
 
+    /** Returns true if the specified milliseconds have passed, and false otherwise. */
     fun hasElapsed(millis: Long) = this.millis >= millis
-
+    /** Returns true if the specified milliseconds have passed, and false otherwise. */
     fun hasElapsed(millis: Double) = this.millis.toDouble() >= millis
+    /** Returns true if the specified milliseconds have passed, and false otherwise. */
+    fun hasElapsed(millis: Int) = this.millis.toInt() >= millis
 }
