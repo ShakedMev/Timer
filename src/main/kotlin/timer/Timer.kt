@@ -2,12 +2,8 @@ package timer
 
 /**
  * A modified version of WPILib's `Timer.java` in `edu.wpi.first.wpilibj`,
- * that is both RoboRIO and PC friendly! (and is in Kotlin)
- *
- * To be PC friendly, it relies on `System.currentTimeMillis`. If you're writing
- * code for a RoboRIO and need a precision of microseconds for some reason
- * (maybe things moving really fast?) use WPIlib's timer instead, it
- * relies on `RobotController.getFPGATimeStamp`.
+ * that is both RoboRIO and PC friendly (which is useful for tests, or just
+ * for code that isn't for the robot).
  */
 class Timer() {
     private var startTimeMillis: Long? = null
@@ -66,9 +62,5 @@ class Timer() {
     }
 
     /** Returns true if the specified milliseconds have passed, and false otherwise. */
-    fun hasElapsed(millis: Long) = this.millis >= millis
-    /** Returns true if the specified milliseconds have passed, and false otherwise. */
-    fun hasElapsed(millis: Double) = this.millis.toDouble() >= millis
-    /** Returns true if the specified milliseconds have passed, and false otherwise. */
-    fun hasElapsed(millis: Int) = this.millis.toInt() >= millis
+    fun hasElapsed(millis: Number) = this.millis >= millis.toDouble()
 }
