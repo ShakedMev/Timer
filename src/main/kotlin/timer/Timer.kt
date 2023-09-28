@@ -8,7 +8,8 @@ package timer
 class Timer() {
     private var startTimeMillis: Long? = null
     private var accumulatedTimeMillis = 0L
-    private var running = false
+    var running = false
+        private set
 
     var millis = 0L
         get() {
